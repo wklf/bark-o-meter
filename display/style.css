@@ -1,0 +1,43 @@
+
+body {    
+    background-color: #a1a1a1;
+    margin: 25;
+}
+
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 250%;
+    text-align: center;
+    color: #307e6d;
+}
+
+.Plot_container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #f09797;
+    background-color: #307e6d;
+    min-height: auto;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+}
+
+.Footer_content {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+a:link {
+    color:  #f09797;
+}
+
+a:visited {
+    color:  #f09797;
+}
