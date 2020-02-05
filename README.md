@@ -3,7 +3,7 @@
 Don't you hate wondering whether your dog is peacefully sleeping or throwing a fit when you're out of the house?
 This repository contains the code used to build a bark-o-meter to monitor and register barking when out of the house.
 
-The project uses a raspberry pi for collecting, storing and presenting data. Data is captured using a VMA309 sound sensor.
+The project uses a raspberry pi for collecting, storing and presenting data. Data is captured using a Vellman VMA309 sound sensor.
 
 ## Roadmap
 The project has two parts. The first part deals with setting up hardware, capturing sound data and storing it. The second part presents the data to the user. The working order is presented below.
@@ -27,5 +27,14 @@ The project has two parts. The first part deals with setting up hardware, captur
 - [ ] Publish dashboard on local network for testing.
 - [ ] Publish dashboard for online access.
 
+## Software
+The project is written using C for recording sound from the sensor and storing it, Java for constructing a simple back-end to deliver data, and finally a simple web stack for presenting the data as a webpage. The following libraries and/or frameworks are used:
+* pigpio (link) - for reading data from the sensor using the RPi.
+* Java Spark (insert link) - simple web server for delivering data to the dashboard.
+* Plotly (insert link)- a fairly simple but powerful tool for presenting data using javascript.
+
 ## Future Work
 * Use a proper database to store data points
+
+## Tweaking the sound sensor
+Capturing the correct noises is tricky. The sensor has a tendency to capture e.g. the washing machine amongst other things. This can be solved in two ways, one based using hardware and one using software. Option one is to tweak the sensitivity of the sensor using the potentiometer. The second option is to discard sound readings below some threshold. The level of both depends on the location of the sensor as well as the proximity to external sound sources.
