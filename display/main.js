@@ -1,65 +1,95 @@
 
 let data_display = document.getElementById('data_display');
 
-function load(){
-
+function loadData(){
+    let data = $.ajax({
+        url: "http://localhost:5000/data/week",
+        type: "GET",
+        headers: {"Accept": "application/json"},
+    }).fail(function(){
+        console.log('error');
+    });
+    return data;
 }
 
 function display(){
+    loadData().then(function(rawData){
+        console.log(rawData);
+        let dataX = [];
+        let dataY = [];
+        let dataOnX = [];
+        let dataOnY = [];
+        let dataOffX = [];
+        let dataOffY = [];
 
+        for(i = 0; i < rawData.length; i++){
+            let temp = rawData[i];
+
+            if(temp.event == 'event'){
+                dataX.push(convertIntTimeToStrTimestamp(temp.time));
+                dataY.push(temp.level);
+            } else if(temp.event == 'on'){
+                dataOnX.push(convertIntTimeToStrTimestamp(temp.time));
+                dataOnY.push(temp.level);
+            } else if(temp.event == 'off'){
+                dataOffX.push(convertIntTimeToStrTimestamp(temp.time));
+                dataOffY.push(temp.level);
+            }
+        }
+
+        plotData(dataX, dataY, dataOnX, dataOnY, dataOffX, dataOffY);
+    });
 }
 
-function load_data(){
+function convertIntTimeToStrTimestamp(time){
+    time = new Date(time);
+    let result = time.getFullYear() + "-" +
+        (time.getMonth() + 1) + "-" +
+        time.getDate() + " " +
+        time.getHours() + ":" +
+        time.getMinutes() + ":" +
+        time.getSeconds();
+    return result;
+}
+
+function plotData(dataEventX, dataEventY, dataOnX, dataOnY, dataOffX, dataOffY){
 
     var data = [
         {
-            name: "Sound level",
+            name: "Event",
             type: "scatter",
-            mode: "lines",
-            line: {color: '#05a6a1'},
-            x: ['2020-02-16 14:15:00',
-                '2020-02-16 14:20:00',
-                '2020-02-16 14:21:00',
-                '2020-02-16 14:22:00',
-                '2020-02-16 14:23:00',
-                '2020-02-16 14:24:00',
-                '2020-02-16 14:25:00',
-                '2020-02-16 14:26:00',
-                '2020-02-16 14:27:00',
-                '2020-02-16 14:28:00',
-                '2020-02-16 14:29:00',
-                '2020-02-16 14:30:00',
-                '2020-02-16 14:31:00',
-                '2020-02-16 14:32:00',
-                '2020-02-16 16:32:00',
-                '2020-02-16 16:33:00',
-                '2020-02-16 16:36:00',
-                '2020-02-16 16:37:00',
-                '2020-02-16 18:32:00',
-                '2020-02-16 18:52:00'
-            ],
-            y: [0, 0, 0, 0, 0, 0, 1, 3, 2, 0, 3, 2, 3, 0, 0, 5, 4, 0, 0, 0]
-       },
-       {
-           name: "On",
-           mode: "markers",
-           marker: {
-            color: '#0e7d07',
-            size: 10
-           },
-           x: ['2020-02-16 14:15:00'],
-           y: [0],
-       },
-       {
-        name: "Off",
-        mode: "markers",
-        marker: {
-         color: '#ad2800',
-         size: 10
+            mode: "markers",
+            marker: {
+                color: 'rgba(63,182,191,0.4)',
+                size: 20,
+                    line: {
+                        color: '#873FBF',
+                        width: 3
+                    }
+            },
+            x: dataEventX,
+            y: dataEventY
         },
-        x: ['2020-02-16 18:52:00'],
-        y: [0]
-        }
+        {
+            name: "On",
+            mode: "markers",
+            marker: {
+                color: '#0e7d07',
+                size: 20
+            },
+            x: dataOnX,
+            y: dataOnY
+        },
+        {
+            name: "Off",
+            mode: "markers",
+            marker: {
+                color: '#ad2800',
+                size: 20
+            },
+            x: dataOffX,
+            y: dataOffY
+         }
     ];
 
     var layout = {
@@ -68,15 +98,20 @@ function load_data(){
             type: 'date'
         },
         yaxis: {
-            range: [-1, 5],
-            type: 'linear'
+            type: 'linear',
+            range: [-0.5, 6],
+            zeroline: false
         },
         showlegend: true,
         legend: {
-            x: 1,
-            xanchor: 'right',
-            y: 1
+            x: 0.7,
+            y: 1.15,
+            orientation: "h",
+            bordercolor: '#000000',
+            borderwidth: 1
         } 
     };
+    
     Plotly.newPlot('data_display', data, layout);
 }
+

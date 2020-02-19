@@ -8,9 +8,17 @@ public class DBManager {
     private String ip = "";
     private String dbName = "";
     private String user = "";
-    private String password = ""; //add password
-    private String port = "";
+    private String password = "";
+    private String port = "5432";
     private String url = "jdbc:postgresql://" + ip + ":" + port + "/" + dbName;
+
+    public DBManager(String ip, String dbName, String user, String pw){
+        this.ip = ip;
+        this.dbName = dbName;
+        this.user = user;
+        this.password = pw;
+        url = "jdbc:postgresql://" + ip + ":" + port + "/" + dbName;
+    }
 
     public Connection connect() {
         Connection conn = null;
@@ -57,11 +65,9 @@ public class DBManager {
 
             conn.close();
         } catch (SQLException ex) {
-            System.out.println("get all errors");
             System.out.println(ex.getMessage());
         }
 
         return result;
     }
-
 }

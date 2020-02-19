@@ -7,28 +7,21 @@ import static spark.Spark.*;
 
 public class WebServer {
 
-    private DBManager dbm = new DBManager();
+    private DBManager dbm = new DBManager(); // add db info
 
     private WebServer(){
         spark.Spark.staticFiles.location("/public");
         spark.Spark.staticFiles.header("Access-Control-Allow-Origin", "*");
         spark.Spark.port(5000);
         setupRoutes();
-
-        //test();
+        test();
     }
 
     private void test(){
-        ArrayList<SoundEvent> arr = dbm.readDataWeek();
-
-        for(int i = 0; i < arr.size(); i++){
-            System.out.println(arr.get(i).toString());
-        }
-
+        ArrayList<SoundEvent> arr = dbm.readDataAll();
         System.out.println(stringifyEvents(arr));
     }
 
-    // send data as JSON and should be done
     private void setupRoutes(){
 
         before((req, res) -> {
@@ -41,7 +34,7 @@ public class WebServer {
         });
 
         get("/data/all", (request, response) -> {
-            System.out.println("Data all");
+            System.out.println("Log - Request - Data all");
             response.type("application/json");
             ArrayList<SoundEvent> arr = dbm.readDataAll();
             String json = stringifyEvents(arr);
@@ -49,7 +42,7 @@ public class WebServer {
         });
 
         get("/data/week", (request, response) -> {
-            System.out.println("Data today");
+            System.out.println("Log - Request - Data week");
             response.type("application/json");
             ArrayList<SoundEvent> arr = dbm.readDataWeek();
             String json = stringifyEvents(arr);
@@ -57,7 +50,7 @@ public class WebServer {
         });
 
         get("/data/today", (request, response) -> {
-            System.out.println("Data today");
+            System.out.println("Log - Request - Data today");
             response.type("application/json");
             ArrayList<SoundEvent> arr = dbm.readDataToday();
             String json = stringifyEvents(arr);
@@ -84,7 +77,5 @@ public class WebServer {
         System.out.println("Server started!");
         TempGUI gui = new TempGUI();
         WebServer server = new WebServer();
-
     }
-
 }

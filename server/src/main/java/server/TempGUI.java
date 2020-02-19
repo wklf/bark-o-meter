@@ -2,8 +2,6 @@ package server;
 
 import javax.swing.*;
 import java.awt.*;
-//import java.awt.event.ActionListener;
-
 
 // this entire class should be replaced with a CLI interface (picocli?)
 public class TempGUI extends JPanel {
@@ -24,6 +22,4 @@ public class TempGUI extends JPanel {
             frameMain.setLocationRelativeTo(null);
         });
     }
-
-
 }
