@@ -28,7 +28,7 @@ The project has two parts. The first part deals with setting up hardware, captur
 - [ ] Publish dashboard for online access.
 
 ## Software
-The project is written using C for recording sound from the sensor and storing it, Java for constructing a simple back-end to deliver data, and finally a simple web stack for presenting the data as a webpage. The following libraries and/or frameworks are used:
+The project is written using C for recording sound from the sensor and storing it, Java for constructing a simple back-end to deliver data, and finally a simple web stack for presenting the data as a webpage. The final goal is to have a simple VPS run the dashboard and database and let the raspberry pi upload data to the database. The following libraries and/or frameworks are used:
 * pigpio (link) - for reading data from the sensor using the RPi.
 * Java Spark (insert link) - simple web server for delivering data to the dashboard.
 * Plotly (insert link)- a fairly simple but powerful library for presenting data using JavaScript.
