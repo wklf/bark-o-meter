@@ -10,12 +10,12 @@ The first working iteration is complete. It has been tested over the local netwo
 ## Roadmap and task status
 The project has two parts. The first part deals with setting up hardware, capturing sound data and storing it. The second part presents the data to the user. The working order is presented below.
 
-1. Capturing data
+### Capturing data
 - [x] Connect sensor to Raspberry pi and verify that it works.
 - [x] Setup routine that registers when a sound occurrs.
 - [x] Record time of occurrence.
 - [x] Design and implement structure for storing and exporting data.
-2. Presenting data
+### Presenting data
 - [x] Import data.
 - [x] Build simple dashboard for presenting data.
 - [x] Publish dashboard on local network for testing.
