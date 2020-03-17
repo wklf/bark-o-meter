@@ -1,5 +1,4 @@
 # Bark-o-meter
-## Introduction
 Don't you hate wondering whether your dog is peacefully sleeping or throwing a fit when you're out of the house?
 This repository contains the code used to build a bark-o-meter to monitor and register barking when out of the house.
 
