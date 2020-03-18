@@ -37,18 +37,29 @@ function display(){
             }
         }
 
+        console.log(dataOnX);
+        console.log(dataX);
+        console.log(dataOffX);
         plotData(dataX, dataY, dataOnX, dataOnY, dataOffX, dataOffY);
     });
 }
 
-function convertIntTimeToStrTimestamp(time){
-    time = new Date(time);
-    let result = time.getFullYear() + "-" +
-        (time.getMonth() + 1) + "-" +
-        time.getDate() + " " +
-        time.getHours() + ":" +
-        time.getMinutes() + ":" +
-        time.getSeconds();
+function convertIntTimeToStrTimestamp(timeRaw){
+    let time = new Date(timeRaw);
+    
+    let month = '' + (time.getMonth() + 1);
+    let day = '' + time.getDate();
+    let hour = '' + time.getHours();
+    let min = '' + time.getMinutes();
+    let sec = '' + time.getSeconds();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    if (hour.length < 2) hour = '0' + hour;
+    if (min.length < 2) min = '0' + min;
+    if (sec.length < 2) sec = '0' + sec;
+
+    let result =  time.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
     return result;
 }
 
@@ -99,7 +110,7 @@ function plotData(dataEventX, dataEventY, dataOnX, dataOnY, dataOffX, dataOffY){
         },
         yaxis: {
             type: 'linear',
-            range: [-0.5, 6],
+            range: [-0.5, 1.5],
             zeroline: false
         },
         showlegend: true,

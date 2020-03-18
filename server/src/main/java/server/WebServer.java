@@ -14,9 +14,9 @@ public class WebServer {
         spark.Spark.staticFiles.header("Access-Control-Allow-Origin", "*");
         spark.Spark.port(5000);
         setupRoutes();
-        test();
     }
 
+    // Test and debugging method
     private void test(){
         ArrayList<SoundEvent> arr = dbm.readDataAll();
         System.out.println(stringifyEvents(arr));
